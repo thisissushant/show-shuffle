@@ -1,0 +1,16 @@
+{
+  "name": "show-shuffle",
+  "version": "1.0.0",
+  "description": "A video stream platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Video",
+    "VideoStream",
+    "OnlineVideo"
+  ],
+  "author": "Sushant Singh",
+  "license": "ISC"
+}
