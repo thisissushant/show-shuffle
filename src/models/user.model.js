@@ -31,7 +31,6 @@ const userSchema = new Schema(
     },
     coverImage: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
@@ -64,7 +63,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
-      _id: this.id,
+      _id: this._id,
       email: this.email,
       fullname: this.fullname,
       username: this.username,
