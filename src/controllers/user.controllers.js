@@ -6,7 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 const genrateAccessAndRefereshTokens = async (userId) => {
   try {
-    const user = await User.findById();
+    const user = await User.findById(userId);
 
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
@@ -16,7 +16,7 @@ const genrateAccessAndRefereshTokens = async (userId) => {
 
     return { accessToken, refreshToken };
   } catch (error) {
-    throw new ApiError(500, "Somthing went wrong while genrati tokens");
+    throw new ApiError(500, "Somthing went wrong while genrating tokens");
   }
 };
 
@@ -96,10 +96,10 @@ const loginUser = asyncHandler(async (req, res) => {
   //genrate access token and refresh token
   //send cookes
   const { username, email, password } = req.body;
-  if (!username || !email) {
+  if (!(username || email)) {
     throw new ApiError(400, "email or username is required");
   }
-  const user = User.findOne({
+  const user = await User.findOne({
     $or: [{ username }, { email }],
   });
   if (!user) {
@@ -116,7 +116,7 @@ const loginUser = asyncHandler(async (req, res) => {
   );
 
   const loggedInUser = await User.findById(user._id).select(
-    "-password, refreshToken"
+    "-password, -refreshToken"
   );
 
   const options = {
