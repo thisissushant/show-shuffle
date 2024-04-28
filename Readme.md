@@ -41,7 +41,7 @@ $npm install
 ```
 - create a .env file 
 ```
-chai-backend/
+show-shuffle/
 │
 ├──node_modules/
 ├── public/
